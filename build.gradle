@@ -15,7 +15,7 @@ repositories {
         dirs 'C:/Users/masha/IdeaProjects/SurrogateDriving/src/main/webapp/WEB-INF/lib'
     }
 }
-
+asdsdas
 dependencies {
     // Java EE 8 dependency
     compileOnly group: 'javax', name: 'javaee-api', version: '8.0.1'
