@@ -15,7 +15,7 @@
 
     <ui:define name="title">
         <!-- Set the page title -->
-        <h:outputText value="Create Account for customer" />
+        <h:outputText value="Create Account for driver" />
     </ui:define>
 
     <!-- Create the content for this page below -->
@@ -56,6 +56,21 @@
 
                     <!--
                     ********************************
+                    *          license number      *
+                    ********************************
+                    -->
+                    <p:outputLabel value="Driver License #:" for="address1" />
+                    <!--
+                    The required="true" attribute automatically places an asterisk *
+                    at the end of the value to indicate that the field is required.
+                    -->
+                    <p:inputText id="address1" value="#{userController.address1}" style="width: 290px"
+                                 required="true" requiredMessage="Driver License # is required!">
+                        <f:validateLength minimum="2" />
+                    </p:inputText>
+
+                    <!--
+                    ********************************
                     *          DATE of Birth       *
                     ********************************
                     -->
@@ -81,111 +96,6 @@
                     -->
                     <p:inputText id="city" value="#{userController.city}" style="width: 290px"
                                  required="true" requiredMessage="Phone number is required!">
-                        <f:validateLength minimum="2" />
-                    </p:inputText>
-
-                    <!--
-                    ********************************
-                    *          car plate #       *
-                    ********************************
-                    -->
-                    <p:outputLabel value="Car Plate #:" for="email" />
-                    <!--
-                    The required="true" attribute automatically places an asterisk *
-                    at the end of the value to indicate that the field is required.
-                    -->
-                    <p:inputText id="email" value="#{userController.email}" style="width: 290px"
-                                 required="true" requiredMessage="Car plate number is required!">
-                        <f:validateLength minimum="2" />
-                    </p:inputText>
-
-                    <!--
-                    ********************************
-                    *          car color      *
-                    ********************************
-                    -->
-                    <p:outputLabel value="Car Color:" for="address1" />
-                    <!--
-                    The required="true" attribute automatically places an asterisk *
-                    at the end of the value to indicate that the field is required.
-                    -->
-                    <p:inputText id="address1" value="#{userController.address1}" style="width: 290px"
-                                 required="true" requiredMessage="Car color is required!">
-                        <f:validateLength minimum="2" />
-                    </p:inputText>
-
-                    <!--
-                    ********************************
-                    *          car model      *
-                    ********************************
-                    -->
-                    <p:outputLabel value="Car Model:" for="address2" />
-                    <!--
-                    The required="true" attribute automatically places an asterisk *
-                    at the end of the value to indicate that the field is required.
-                    -->
-                    <p:inputText id="address2" value="#{userController.address2}" style="width: 290px"
-                                 required="true" requiredMessage="Car model is required!">
-                        <f:validateLength minimum="2" />
-                    </p:inputText>
-
-                    <!--
-                    ********************************
-                    *          car brand      *
-                    ********************************
-                    -->
-                    <p:outputLabel value="Car brand:" for="state" />
-                    <!--
-                    The required="true" attribute automatically places an asterisk *
-                    at the end of the value to indicate that the field is required.
-                    -->
-                    <p:inputText id="state" value="#{userController.state}" style="width: 290px"
-                                 required="true" requiredMessage="Car brand is required!">
-                        <f:validateLength minimum="2" />
-                    </p:inputText>
-
-                    <!--
-                   ********************************
-                   *          car brand      *
-                   ********************************
-                   -->
-                    <p:outputLabel value="Car year:" for="zipcode" />
-                    <!--
-                    The required="true" attribute automatically places an asterisk *
-                    at the end of the value to indicate that the field is required.
-                    -->
-                    <p:inputText id="zipcode" value="#{userController.zipcode}" style="width: 290px"
-                                 required="true" requiredMessage="Car year is required!">
-                        <f:validateLength minimum="2" />
-                    </p:inputText>
-
-                    <!--
-                   ********************************
-                   *          car type      *
-                   ********************************
-                   -->
-                    <p:outputLabel value="Car type:" for="sequrity_question_number" />
-                    <!--
-                    The required="true" attribute automatically places an asterisk *
-                    at the end of the value to indicate that the field is required.
-                    -->
-                    <p:inputText id="sequrity_question_number" value="#{userController.securityQuestionNumber}" style="width: 290px"
-                                 required="true" requiredMessage="Car type is required!">
-                        <f:validateLength minimum="2" />
-                    </p:inputText>
-
-                    <!--
-                    ********************************
-                    *          car transmission      *
-                    ********************************
-                    -->
-                    <p:outputLabel value="Transmission:" for="firstName" />
-                    <!--
-                    The required="true" attribute automatically places an asterisk *
-                    at the end of the value to indicate that the field is required.
-                    -->
-                    <p:inputText id="temp" value="#{userController.security_questions}" style="width: 290px"
-                                 required="true" requiredMessage="Transmission is required!">
                         <f:validateLength minimum="2" />
                     </p:inputText>
 
@@ -274,4 +184,3 @@
     </ui:define>
 </ui:composition>
 </html>
-
