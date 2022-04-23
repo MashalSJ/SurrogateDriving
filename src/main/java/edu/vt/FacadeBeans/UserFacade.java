@@ -20,7 +20,7 @@ public class UserFacade extends AbstractFacade<User> {
     the entityManager instance with the persistence unitName identified below.
     ---------------------------------------------------------------------------------------------
      */
-    @PersistenceContext(unitName = "SurrogateDriving-JalalyarPU")
+    @PersistenceContext(unitName = "SurrogateDriving-PU")
     private EntityManager entityManager;
 
     // Obtain the object reference of the EntityManager instance in charge of
