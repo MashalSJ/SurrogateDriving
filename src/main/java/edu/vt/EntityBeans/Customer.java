@@ -23,18 +23,9 @@ representing the Customer table in the SurrogateDrivingDB database.
         @NamedQuery(name = "Customer.findAll", query = "SELECT u FROM Customer u")
         , @NamedQuery(name = "Customer.findById", query = "SELECT u FROM Customer u WHERE u.customer_id = :costomer_id")
         , @NamedQuery(name = "Customer.findBySSN", query = "SELECT u FROM Customer u WHERE u.ssn = :SSN")
-        , @NamedQuery(name = "Customer.findByPassword", query = "SELECT u FROM Customer u WHERE u.password = :password")
-        , @NamedQuery(name = "Customer.findByFirstName", query = "SELECT u FROM Customer u WHERE u.firstName = :firstName")
-        , @NamedQuery(name = "Customer.findByMiddleName", query = "SELECT u FROM Customer u WHERE u.middleName = :middleName")
-        , @NamedQuery(name = "Customer.findByLastName", query = "SELECT u FROM Customer u WHERE u.lastName = :lastName")
-        , @NamedQuery(name = "Customer.findByAddress1", query = "SELECT u FROM Customer u WHERE u.address1 = :address1")
-        , @NamedQuery(name = "Customer.findByAddress2", query = "SELECT u FROM Customer u WHERE u.address2 = :address2")
-        , @NamedQuery(name = "Customer.findByCity", query = "SELECT u FROM Customer u WHERE u.city = :city")
-        , @NamedQuery(name = "Customer.findByState", query = "SELECT u FROM Customer u WHERE u.state = :state")
-        , @NamedQuery(name = "Customer.findByZipcode", query = "SELECT u FROM Customer u WHERE u.zipcode = :zipcode")
-        , @NamedQuery(name = "Customer.findBySecurityQuestionNumber", query = "SELECT u FROM Customer u WHERE u.securityQuestionNumber = :securityQuestionNumber")
-        , @NamedQuery(name = "Customer.findBySecurityAnswer", query = "SELECT u FROM Customer u WHERE u.securityAnswer = :securityAnswer")
-        , @NamedQuery(name = "Customer.findByEmail", query = "SELECT u FROM Customer u WHERE u.email = :email")})
+        , @NamedQuery(name = "Customer.findByName", query = "SELECT u FROM Customer u WHERE u.name = :name")
+        , @NamedQuery(name = "Customer.findByDateOfBirth", query = "SELECT u FROM Customer u WHERE u.birthdate = :birthdate")
+        , @NamedQuery(name = "Customer.findByPhoneNumber", query = "SELECT u FROM Customer u WHERE u.phoneNum = :phoneNum")})
 
 public class Customer implements Serializable {
     /*
@@ -69,16 +60,8 @@ public class Customer implements Serializable {
     @Basic(optional = false)
     @NotNull
     //@Size(min = 1, max = 32)
-    @Column(name = "SSN")
-    private Integer SSN;
-
-    // To store Salted and Hashed Password Parts
-    // password VARCHAR(256) NOT NULL
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 256)
-    @Column(name = "password")
-    private String password;
+    @Column(name = "ssn")
+    private Integer ssn;
 
     // name VARCHAR(100) NOT NULL
     @Basic(optional = false)
@@ -87,76 +70,20 @@ public class Customer implements Serializable {
     @Column(name = "name")
     private String name;
 
-    // middle_name VARCHAR(32)
-    // birthdate DATE NOT NULL
-    // birthdate is recorded in the database as YYYY-MM-DD so that it is sortable
+    // Date_Of_Birth DATE NOT NULL
+    // Date_Of_Birth is recorded in the database as YYYY-MM-DD so that it is sortable
     @Basic(optional = false)
     @NotNull
-    @Column(name = "birthdate")
+    @Column(name = "Date_Of_Birth")
     @Temporal(TemporalType.DATE)
     private Date birthdate;
 
-    // last_name VARCHAR(32) NOT NULL
+    // phone_number VARCHAR(32) NOT NULL
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 32)
-    @Column(name = "last_name")
-    private String lastName;
-
-    // address1 VARCHAR(128) NOT NULL
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 128)
-    @Column(name = "address1")
-    private String address1;
-
-    // address2 VARCHAR(128)
-    @Size(max = 128)
-    @Column(name = "address2")
-    private String address2;
-
-    // city VARCHAR(64) NOT NULL
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 64)
-    @Column(name = "city")
-    private String city;
-
-    // state VARCHAR(2) NOT NULL
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 2)
-    @Column(name = "state")
-    private String state;
-
-    // zipcode VARCHAR(10) NOT NULL
-    // e.g., 24060-1804
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 10)
-    @Column(name = "zipcode")
-    private String zipcode;
-
-    // security_question_number INT NOT NULL
-    // Refers to the number of the selected security question
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "security_question_number")
-    private int securityQuestionNumber;
-
-    // security_answer VARCHAR(128) NOT NULL
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 128)
-    @Column(name = "security_answer")
-    private String securityAnswer;
-
-    // email VARCHAR(128) NOT NULL
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 128)
-    @Column(name = "email")
-    private String email;
+    @Column(name = "phone_number")
+    private String phoneNum;
 
     /*
     ===============================================================
@@ -171,27 +98,17 @@ public class Customer implements Serializable {
 
     // Not used but kept for potential future use
     public Customer(Integer id) {
-        this.id = id;
+        this.customer_id = id;
     }
 
     // Not used but kept for potential future use
-    public Customer(Integer id, String customername, String password, String firstName, String middleName,
-                String lastName, String address1, String address2, String city, String state,
-                String zipcode, int securityQuestionNumber, String securityAnswer, String email) {
-        this.id = id;
-        this.customername = customername;
-        this.password = password;
-        this.firstName = firstName;
-        this.middleName = middleName;
-        this.lastName = lastName;
-        this.address1 = address1;
-        this.address2 = address2;
-        this.city = city;
-        this.state = state;
-        this.zipcode = zipcode;
-        this.securityQuestionNumber = securityQuestionNumber;
-        this.securityAnswer = securityAnswer;
-        this.email = email;
+    public Customer(Integer id, String name, String password, Date birthdate,
+                String phoneNum, Integer ssn) {
+        this.customer_id = id;
+        this.name = name;
+        this.birthdate = birthdate;
+        this.phoneNum = phoneNum;
+        this.ssn = ssn;
     }
 
     /*
@@ -201,115 +118,27 @@ public class Customer implements Serializable {
     ======================================================
      */
     public Integer getId() {
-        return id;
+        return customer_id;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.customer_id = id;
     }
 
     public String getCustomername() {
-        return customername;
+        return name;
     }
 
     public void setCustomername(String customername) {
-        this.customername = customername;
+        this.name = customername;
     }
 
-    public String getPassword() {
-        return password;
+    public Integer getSSN() {
+        return ssn;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getMiddleName() {
-        return middleName;
-    }
-
-    public void setMiddleName(String middleName) {
-        this.middleName = middleName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getAddress1() {
-        return address1;
-    }
-
-    public void setAddress1(String address1) {
-        this.address1 = address1;
-    }
-
-    public String getAddress2() {
-        return address2;
-    }
-
-    public void setAddress2(String address2) {
-        this.address2 = address2;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public String getZipcode() {
-        return zipcode;
-    }
-
-    public void setZipcode(String zipcode) {
-        this.zipcode = zipcode;
-    }
-
-    public int getSecurityQuestionNumber() {
-        return securityQuestionNumber;
-    }
-
-    public void setSecurityQuestionNumber(int securityQuestionNumber) {
-        this.securityQuestionNumber = securityQuestionNumber;
-    }
-
-    public String getSecurityAnswer() {
-        return securityAnswer;
-    }
-
-    public void setSecurityAnswer(String securityAnswer) {
-        this.securityAnswer = securityAnswer;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setSSN(Integer ssn) {
+        this.ssn = ssn;
     }
 
     /*
@@ -322,7 +151,7 @@ public class Customer implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (customer_id != null ? customer_id.hashCode() : 0);
         return hash;
     }
 
@@ -337,13 +166,13 @@ public class Customer implements Serializable {
             return false;
         }
         Customer other = (Customer) object;
-        return (this.id != null || other.id == null) && (this.id == null || this.id.equals(other.id));
+        return (this.customer_id != null || other.customer_id == null) && (this.customer_id == null || this.customer_id.equals(other.customer_id));
     }
 
     // Return String representation of database primary key id
     @Override
     public String toString() {
-        return id.toString();
+        return customer_id.toString();
     }
 
 }
